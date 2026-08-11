@@ -54,3 +54,51 @@ that handle real users, real failures, and real business requirements.
 
 Most AI tutorials teach you to call an API and call it a day.
 This roadmap teaches you what happens when that API fails at 3am with 1000 users online.
+---
+What most people learn: What this roadmap teaches:
+────────────────────── ──────────────────────────
+Call OpenAI API → Build reliable async pipelines
+Copy LangChain tutorial → Understand what LangChain hides
+Make a demo chatbot → Deploy a production microservice
+Hope it works → Write eval suites that prove it works
+---
+
+**The honest gaps this roadmap also covers that others skip:**
+- Multi-agent orchestration (supervisor + specialist pattern)
+- Workflow durability (survive crashes mid-task)
+- PII detection and security layers
+- Token bucket rate limiting and backpressure
+- Cost budgets and per-user spending limits
+- Comprehensive error taxonomy and recovery strategies
+
+---
+### System requirments
+
+Python 3.11+
+Docker Desktop
+VS Code + Pylance extension
+Git
+8GB RAM minimum (16GB recommended)
+
+
+### Installation
+```bash
+# Clone repository
+git clone https://github.com/yourusername/genai-roadmap
+cd genai-roadmap
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate          # macOS/Linux
+# venv\Scripts\activate           # Windows
+
+# Install all dependencies
+pip install openai google-generativeai pydantic fastapi uvicorn \
+            qdrant-client chromadb sentence-transformers redis \
+            langgraph ragas deepeval guardrails-ai litellm \
+            httpx rank-bm25 tiktoken aiosqlite rich pypdf \
+            pdfplumber python-dotenv pytest opentelemetry-api \
+            opentelemetry-sdk temporalio cohere
+
+# Setup environment variables
+cp .env.example .env
