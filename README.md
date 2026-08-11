@@ -54,6 +54,7 @@ that handle real users, real failures, and real business requirements.
 
 Most AI tutorials teach you to call an API and call it a day.
 This roadmap teaches you what happens when that API fails at 3am with 1000 users online.
+
 ---
 What most people learn: What this roadmap teaches:
 ────────────────────── ──────────────────────────
@@ -61,7 +62,9 @@ Call OpenAI API → Build reliable async pipelines
 Copy LangChain tutorial → Understand what LangChain hides
 Make a demo chatbot → Deploy a production microservice
 Hope it works → Write eval suites that prove it works
+
 ---
+
 
 **The honest gaps this roadmap also covers that others skip:**
 - Multi-agent orchestration (supervisor + specialist pattern)
@@ -102,3 +105,13 @@ pip install openai google-generativeai pydantic fastapi uvicorn \
 
 # Setup environment variables
 cp .env.example .env
+   ------
+
+## Environment Variables
+
+OPENAI_API_KEY=your_openai_key_here
+GEMINI_API_KEY=your_gemini_key_here
+COHERE_API_KEY=your_cohere_key_here
+QDRANT_URL=your_qdrant_url_here
+QDRANT_API_KEY=your_qdrant_api_key_here
+REDIS_URL=redis://localhost:6379
