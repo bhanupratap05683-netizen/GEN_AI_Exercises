@@ -77,12 +77,11 @@ Hope it works → Write eval suites that prove it works
 ---
 ### System requirments
 
-Python 3.11+
-Docker Desktop
-VS Code + Pylance extension
-Git
-8GB RAM minimum (16GB recommended)
-
+- Python 3.11+
+- Docker Desktop
+- VS Code + Pylance extension
+- Git
+- 8GB RAM minimum (16GB recommended)
 
 ### Installation
 ```bash
