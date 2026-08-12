@@ -56,12 +56,12 @@ Most AI tutorials teach you to call an API and call it a day.
 This roadmap teaches you what happens when that API fails at 3am with 1000 users online.
 
 ---
-What most people learn: What this roadmap teaches:
-────────────────────── ──────────────────────────
-Call OpenAI API → Build reliable async pipelines
-Copy LangChain tutorial → Understand what LangChain hides
-Make a demo chatbot → Deploy a production microservice
-Hope it works → Write eval suites that prove it works
+| #  What most people learn | # What this roadmap teaches|
+|-------------|-------------|
+| Call OpenAI API | Build reliable async pipelines |
+| Copy LangChain tutorial | Understand what LangChain hides |
+| Make a demo chatbot | Deploy a production microservice |
+| Hope it works | Write eval suites that prove it works |
 
 ---
 
@@ -77,12 +77,11 @@ Hope it works → Write eval suites that prove it works
 ---
 ### System requirments
 
-Python 3.11+
-Docker Desktop
-VS Code + Pylance extension
-Git
-8GB RAM minimum (16GB recommended)
-
+- Python 3.11+
+- Docker Desktop
+- VS Code + Pylance extension
+- Git
+- 8GB RAM minimum (16GB recommended)
 
 ### Installation
 ```bash
