@@ -1,0 +1,142 @@
+# HANDS-ON: Real Database + API Integration
+
+import asyncio
+import aiosqlite
+import httpx
+from typing import Optional
+import json
+
+# Setup real SQLite database
+async def setup_database():
+    async with aiosqlite.connect("agent_data.db") as db:
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS products (
+                id INTEGER PRIMARY KEY,
+                name TEXT NOT NULL,
+                price REAL,
+                category TEXT,
+                stock INTEGER,
+                description TEXT
+            )
+        """)
+        
+        await db.execute("""
+            CREATE TABLE IF NOT EXISTS orders (
+                id INTEGER PRIMARY KEY,
+                product_id INTEGER,
+                quantity INTEGER,
+                customer_name TEXT,
+                order_date TEXT,
+                FOREIGN KEY (product_id) REFERENCES products (id)
+            )
+        """)
+        
+        # Insert sample data
+        products = [
+            (1, "Laptop Pro X", 1299.99, "Electronics", 15, "High-performance laptop"),
+            (2, "Wireless Mouse", 29.99, "Accessories", 150, "Ergonomic wireless mouse"),
+            (3, "USB-C Hub", 49.99, "Accessories", 75, "7-in-1 USB-C hub"),
+        ]
+        
+        await db.executemany(
+            "INSERT OR IGNORE INTO products VALUES (?,?,?,?,?,?)", 
+            products
+        )
+        await db.commit()
+
+# Async SQL executor with safety
+async def safe_sql_query(query: str, database: str = "agent_data.db") -> dict:
+    # Safety check
+    forbidden = ["DROP", "DELETE", "UPDATE", "INSERT", "ALTER", "CREATE"]
+    query_upper = query.strip().upper()
+    
+    for keyword in forbidden:
+        if keyword in query_upper:
+            return {"error": f"'{keyword}' operations not permitted"}
+    
+    if not query_upper.startswith("SELECT"):
+        return {"error": "Only SELECT queries allowed"}
+    
+    try:
+        async with aiosqlite.connect(database) as db:
+            db.row_factory = aiosqlite.Row
+            
+            async with db.execute(query) as cursor:
+                rows = await cursor.fetchmany(100)  # limit rows
+                columns = [d[0] for d in cursor.description]
+                
+                return {
+                    "columns": columns,
+                    "rows": [dict(row) for row in rows],
+                    "row_count": len(rows)
+                }
+                
+    except aiosqlite.Error as e:
+        return {"error": f"Database error: {str(e)}"}
+
+# Async REST API caller with fallback
+async def call_rest_api(
+    url: str,
+    method: str = "GET",
+    headers: dict = None,
+    params: dict = None,
+    timeout: float = 10.0
+) -> dict:
+    try:
+        async with httpx.AsyncClient(timeout=timeout) as client:
+            response = await client.request(
+                method=method,
+                url=url,
+                headers=headers or {},
+                params=params or {}
+            )
+            
+            # Handle rate limiting
+            if response.status_code == 429:
+                retry_after = int(response.headers.get("retry-after", 60))
+                return {
+                    "error": "rate_limited",
+                    "retry_after_seconds": retry_after,
+                    "message": f"Rate limited. Try again in {retry_after}s"
+                }
+            
+            response.raise_for_status()
+            
+            return {
+                "status_code": response.status_code,
+                "data": response.json(),
+                "success": True
+            }
+            
+    except httpx.TimeoutException:
+        return {"error": "timeout", "message": f"Request timed out after {timeout}s"}
+    except httpx.HTTPStatusError as e:
+        return {
+            "error": "http_error",
+            "status_code": e.response.status_code,
+            "message": str(e)
+        }
+    except Exception as e:
+        return {"error": "request_failed", "message": str(e)}
+
+# Test
+async def main():
+    await setup_database()
+    
+    # Test SQL
+    result = await safe_sql_query(
+        "SELECT name, price, stock FROM products WHERE category = 'Electronics'"
+    )
+    print("SQL Result:", json.dumps(result, indent=2))
+    
+    # Test forbidden SQL
+    result = await safe_sql_query("DROP TABLE products")
+    print("Forbidden SQL:", result)
+    
+    # Test REST API
+    result = await call_rest_api(
+        "https://jsonplaceholder.typicode.com/todos/1"
+    )
+    print("API Result:", json.dumps(result, indent=2))
+
+asyncio.run(main())
