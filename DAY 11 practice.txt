@@ -1,0 +1,31 @@
+THEORY (3 hours):
+├── Why Reranking?
+│   ├── Retrieval gets top-50 candidates (fast but imprecise)
+│   ├── Reranker scores each candidate vs query (slow but precise)
+│   ├── Two-stage: fast retrieval → precise reranking
+│   └── Trade-off: latency vs accuracy
+│
+├── Bi-Encoder vs Cross-Encoder:
+│   ├── Bi-Encoder (embedding model):
+│   │   ├── Encodes query and doc SEPARATELY
+│   │   ├── Pre-compute doc embeddings (fast at search time)
+│   │   └── Less accurate (no query-doc interaction)
+│   │
+│   └── Cross-Encoder (reranker):
+│       ├── Encodes query AND doc TOGETHER
+│       ├── Full attention between query and document
+│       ├── Can't pre-compute (slow, processes pairs)
+│       └── Much more accurate
+│
+├── Cohere Reranker:
+│   ├── API-based reranker (no local GPU needed)
+│   ├── Input: query + list of documents
+│   ├── Output: relevance scores for each document
+│   └── Cost: per document scored
+│
+└── RAG Pipeline Architecture:
+    ├── Ingest: PDF → chunks → embeddings → vector DB
+    ├── Retrieve: query → BM25 + vector search → RRF
+    ├── Rerank: top-50 candidates → cross-encoder → top-10
+    ├── Augment: question + top-10 docs → prompt
+    └── Generate: LLM produces answer grounded in docs
