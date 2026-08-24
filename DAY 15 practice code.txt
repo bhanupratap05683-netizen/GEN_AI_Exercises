@@ -8,3 +8,18 @@ Complete autonomous agent with:
 ├── Self-correction on failures
 ├── Trajectory logging
 └── Human-readable step-by-step output
+
+Key integration from all previous days:
+├── Tool calling patterns (Day 6-7)
+├── Async/concurrent execution (Day 2)
+├── State machine (Day 13)
+├── Redis memory (Day 14)
+└── Error handling (all days)
+
+Build checklist:
+[ ] Agent processes 5-step multi-tool task end-to-end
+[ ] Fails gracefully when tool errors occur
+[ ] Stores conversation in Redis between restarts
+[ ] Pauses and waits for human on "dangerous" actions
+[ ] Full trajectory saved to JSON file
+[ ] CLI shows each step clearly
