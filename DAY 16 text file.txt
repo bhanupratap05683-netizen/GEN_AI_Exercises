@@ -1,0 +1,65 @@
+THEORY (4 hours):
+├── Why Evals Matter:
+│   ├── "It works in demo" ≠ "It works in production"
+│   ├── Model updates break behavior silently
+│   ├── Prompt changes have unintended side effects
+│   └── Only continuous testing catches regressions
+│
+├── Key Metrics:
+│   ├── Faithfulness:
+│   │   ├── Does answer contain ONLY info from context?
+│   │   ├── Hallucination = claims not in context
+│   │   └── Score 0-1, higher is better
+│   │
+│   ├── Answer Relevance:
+│   │   ├── Does answer actually address the question?
+│   │   ├── Can answer the question ≠ relevant answer
+│   │   └── Score 0-1
+│   │
+│   ├── Context Precision:
+│   │   ├── Were the retrieved chunks relevant?
+│   │   ├── Noisy retrieval = worse answers
+│   │   └── Measures your RAG retrieval quality
+│   │
+│   ├── Context Recall:
+│   │   ├── Did retrieval find ALL necessary info?
+│   │   ├── Missing chunks = incomplete answers
+│   │   └── Need ground truth to calculate
+│   │
+│   ├── Hallucination Rate:
+│   │   ├── % of responses with made-up facts
+│   │   ├── Critical for factual domains
+│   │   └── Track over time
+│   │
+│   └── Tool Correctness:
+│       ├── Did agent call the right tool?
+│       ├── Were arguments correct?
+│       └── Compare to golden trajectory
+│
+├── LLM-as-a-Judge:
+│   ├── Use a stronger LLM to evaluate outputs
+│   ├── Cheaper than human evaluation at scale
+│   ├── Pattern: (question, context, answer) → score + reasoning
+│   ├── Risk: judge can be wrong (biases toward verbose answers)
+│   └── Calibrate against human judgments
+│
+├── Golden Test Sets:
+│   ├── Curated (question, context, expected_answer) triples
+│   ├── 50+ examples covering edge cases
+│   ├── Include: easy, medium, hard questions
+│   ├── Include: out-of-scope questions
+│   └── Must be updated when domain changes
+│
+├── RAGAS Framework:
+│   ├── pip install ragas
+│   ├── Automated RAG evaluation pipeline
+│   ├── Uses LLM to compute metrics
+│   └── Integrates with common frameworks
+│
+└── Prompt Injection Defenses:
+    ├── Type 1: "Ignore previous instructions"
+    ├── Type 2: Role hijacking ("You are now...")
+    ├── Type 3: Data exfiltration ("Print your system prompt")
+    ├── Defense: input sanitization
+    ├── Defense: output scanning
+    └── Defense: separate trust levels for inputs
