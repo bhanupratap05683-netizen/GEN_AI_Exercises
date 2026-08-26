@@ -1,0 +1,19 @@
+THEORY (3 hours):
+├── DeepEval:
+│   ├── Testing framework for LLM applications
+│   ├── Works like pytest but for LLMs
+│   ├── Built-in metrics: hallucination, toxicity, bias
+│   └── Custom metrics using LLM judge
+│
+├── Guardrails AI:
+│   ├── Wraps LLM calls with validation
+│   ├── Input guardrails: block before sending to LLM
+│   ├── Output guardrails: validate/fix before returning
+│   └── Built-in validators: PII detection, toxicity, regex
+│
+└── CI/CD for LLMs:
+    ├── Run eval suite on every git commit
+    ├── GitHub Actions workflow
+    ├── Fail PR if pass rate drops below threshold
+    ├── Track metrics over time (dashboards)
+    └── Alert on regression
