@@ -1,0 +1,37 @@
+THEORY (4 hours):
+├── Why Observability?
+│   ├── Production issues you CANNOT debug without traces:
+│   │   ├── Why did agent take 45 seconds?
+│   │   ├── Which tool call failed?
+│   │   ├── What was the exact prompt?
+│   │   └── How many tokens did this workflow use?
+│   └── Traces answer all these questions
+│
+├── OpenTelemetry:
+│   ├── Open standard for distributed tracing
+│   ├── Traces: end-to-end request journey
+│   ├── Spans: individual operation within trace
+│   ├── Span attributes: metadata (model, tokens, tool name)
+│   ├── Parent-child spans: nested operations
+│   └── Exporters: send to Jaeger, DataDog, Arize, etc.
+│
+├── LLM-Specific Observability:
+│   ├── Prompt logging (what went in)
+│   ├── Completion logging (what came out)
+│   ├── Token counts per call
+│   ├── Latency per component
+│   ├── Tool call success/failure rates
+│   └── User feedback correlation
+│
+├── LangSmith:
+│   ├── LangChain's observability platform
+│   ├── Works without LangChain
+│   ├── View complete LLM call traces
+│   ├── Compare prompt versions
+│   └── Free tier available
+│
+└── Arize Phoenix:
+    ├── Open-source LLM observability
+    ├── Runs locally (no cloud required)
+    ├── Excellent for RAG debugging
+    └── Shows retrieved documents per query
