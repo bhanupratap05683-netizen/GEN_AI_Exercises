@@ -1,0 +1,11 @@
+FULL PROJECT BUILD:
+Create 50+ golden test cases and automated CI:
+├── 15 faithfulness tests (RAG pipeline)
+├── 15 tool correctness tests (agent tool calls)  
+├── 10 hallucination detection tests
+├── 5 prompt injection resistance tests
+├── 5 edge case tests (empty input, very long input)
+├── pytest integration for all tests
+├── GitHub Actions workflow file
+├── Metrics dashboard (simple HTML report)
+└── Threshold configuration (fail build if <85% pass)
