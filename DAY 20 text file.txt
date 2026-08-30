@@ -1,0 +1,31 @@
+THEORY (3 hours):
+├── FastAPI:
+│   ├── Modern Python web framework
+│   ├── Async-first (works perfectly with asyncio)
+│   ├── Automatic OpenAPI docs (Swagger)
+│   ├── Type hints = automatic validation
+│   └── Dependency injection system
+│
+├── Server-Sent Events (SSE):
+│   ├── One-way stream: server → client
+│   ├── Perfect for LLM streaming output
+│   ├── Client keeps connection open
+│   ├── Format: "data: {json}\n\n"
+│   └── Reconnects automatically on disconnect
+│
+├── Semantic Caching:
+│   ├── Regular cache: exact string match
+│   ├── Semantic cache: similar meaning = cache hit
+│   ├── Implementation:
+│   │   ├── Embed the query
+│   │   ├── Search vector cache for similar queries
+│   │   ├── If similarity > threshold: return cached response
+│   │   └── If miss: call LLM, cache result with embedding
+│   ├── Redis Vector (RedisSearch): vectors in Redis
+│   └── Cost savings: 30-70% on repeated/similar queries
+│
+└── Prompt Caching (Provider-level):
+    ├── OpenAI: caches prompt prefix automatically
+    ├── Anthropic: explicit cache_control markers
+    ├── Requires: same prefix, frequent use
+    └── Savings: 50% discount on cached tokens
