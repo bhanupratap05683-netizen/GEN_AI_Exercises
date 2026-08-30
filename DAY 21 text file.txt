@@ -1,0 +1,18 @@
+THEORY (2 hours):
+├── Model Routing Logic:
+│   ├── Not all queries need GPT-4o
+│   ├── Simple queries → cheap fast model
+│   ├── Complex queries → expensive powerful model
+│   ├── Routing signals:
+│   │   ├── Query complexity (length, technical terms)
+│   │   ├── Task type (extraction, reasoning, creative)
+│   │   ├── Required tools (some tools need better models)
+│   │   └── User tier (free vs paid)
+│   └── Cost impact: 60-80% cost reduction possible
+│
+└── LiteLLM:
+    ├── Unified interface for 100+ LLM providers
+    ├── Same API regardless of provider
+    ├── Built-in fallbacks and load balancing
+    ├── Cost tracking per model
+    └── pip install litellm
