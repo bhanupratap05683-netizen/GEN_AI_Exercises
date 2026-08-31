@@ -1,0 +1,31 @@
+THEORY (4 hours):
+├── Workflow Durability (NEW GAP):
+│   ├── Problem: Agent crashes halfway through multi-day task
+│   ├── Solution: Checkpoint state at each step
+│   ├── Resume: Load checkpoint, skip completed steps
+│   └── Tools: Temporal.io, Inngest, custom checkpointing
+│
+├── Idempotency:
+│   ├── Running the same step twice = same result
+│   ├── Critical when retrying failed workflows
+│   ├── Implementation: deduplicate by (workflow_id, step_id)
+│   └── Use unique IDs for all external API calls
+│
+├── Comprehensive Error Taxonomy:
+│   ├── Transient: network timeout → retry
+│   ├── Permanent: invalid API key → stop, alert
+│   ├── Logic: agent stuck in loop → step limit, human
+│   ├── Resource: rate limit → backpressure, queue
+│   └── Data: bad input → validate, sanitize, reject
+│
+├── Backpressure:
+│   ├── Producer too fast for consumer
+│   ├── Signal upstream to slow down
+│   ├── asyncio.Queue with max size = natural backpressure
+│   └── HTTP 429 with Retry-After = backpressure to client
+│
+└── Cost Tracking & Budgets:
+    ├── Per-request cost attribution
+    ├── Per-user/session budget limits
+    ├── Alert when approaching limit
+    └── Hard stop when budget exceeded
