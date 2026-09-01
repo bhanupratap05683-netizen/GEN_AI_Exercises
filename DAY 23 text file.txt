@@ -1,0 +1,24 @@
+THEORY (3 hours):
+├── Tool Permission Scoping (NEW GAP):
+│   ├── Define what each tool CAN and CANNOT do
+│   ├── Role-based: free tier vs paid tier tools
+│   ├── Scope-based: read-only vs read-write
+│   └── Audit every sensitive tool call
+│
+├── PII Detection & Redaction (NEW GAP):
+│   ├── Never log PII (SSN, credit card, password)
+│   ├── Detect before logging/storing
+│   ├── Redact in responses if not needed
+│   └── Libraries: presidio, spacy, regex patterns
+│
+├── Rate Limiting & Backpressure (NEW GAP):
+│   ├── Per-user rate limits
+│   ├── Per-model rate limits
+│   ├── Token bucket algorithm
+│   └── Queue with priority
+│
+└── Cost Budgets (NEW GAP):
+    ├── Per-user monthly budget
+    ├── Per-request maximum tokens
+    ├── Alert at 80% budget used
+    └── Hard stop at 100%
