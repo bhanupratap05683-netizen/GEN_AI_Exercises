@@ -123,3 +123,4 @@ REDIS_URL=redis://localhost:6379
 - DAY 1 - cost calculator.py
 - DAY 1 - tokenizer explorer.py
 - DAY 2 - practice code.py
+- DAY 3 - practice code.py
