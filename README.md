@@ -130,4 +130,5 @@ REDIS_URL=redis://localhost:6379
 - DAY 7 - practice code.py
 - DAY 8 - practice code.py
 - DAY 9 - practice code.py
-- 
+- DAY 10 - practice code.py
+- DAY 11 - practice code.py
