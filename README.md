@@ -144,7 +144,7 @@ REDIS_URL=redis://localhost:6379
 - DAY 21 - practice code.py
 - DAY 22 - practice code.py
 - DAY 23 - practice code.py
-- DAY 24 practice code.py
+- DAY 24 - practice code.py
 - DAY 19 text file.txt
 - DAY 21 text file.txt
 - DAY 22 text file.txt
@@ -153,3 +153,4 @@ REDIS_URL=redis://localhost:6379
 - DAY 16 text file.txt
 - DAY 15 practice code.txt
 - DAY 23 text file.txt
+- DAY 22 text file.txt
