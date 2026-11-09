@@ -149,3 +149,4 @@ REDIS_URL=redis://localhost:6379
 ## Text files
 ---------------------------------------------------------------
 - DAY 15 text file.txt
+- DAY 16 text file.txt
